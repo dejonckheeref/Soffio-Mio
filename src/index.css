@@ -1,0 +1,136 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-fresco-bg: #F5E6C8;
+  --color-fresco-parchment: #EDD9A3;
+  --color-fresco-brown: #8B4513;
+  --color-fresco-gold: #C9A84C;
+  --color-fresco-gold-light: #E8C96A;
+  --color-fresco-rust: #A0522D;
+  --color-fresco-blue: #5B7FA6;
+  --color-fresco-green: #6B8E4E;
+  --color-fresco-dark: #3C2A1A;
+  --color-fresco-shadow: rgba(60, 42, 26, 0.35);
+
+  --font-cinzel: 'Cinzel', serif;
+  --font-garamond: 'EB Garamond', serif;
+  --font-mono: ui-monospace, 'Courier New', monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background-color: #1a0c04;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  /* Image IS the background — no pseudo-element tricks */
+  background-image: url('/frontier-bg.png');
+  background-size: cover;
+  background-position: 55% 38%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  font-family: 'EB Garamond', serif;
+  color: #3C2A1A;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Dark vignette sits between image and content so text stays readable */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background: rgba(14, 7, 2, 0.28);
+}
+
+/* Ornamental divider */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 1.5rem 0;
+  color: #C9A84C;
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C9A84C, transparent);
+}
+
+.ornament-divider span {
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+/* Tab notation block */
+.tab-block {
+  font-family: ui-monospace, 'Courier New', monospace;
+  font-size: 1rem;
+  line-height: 1.8;
+  background: rgba(60, 42, 26, 0.06);
+  border: 1px solid #C9A84C;
+  border-radius: 4px;
+  padding: 1rem 1.25rem;
+  white-space: pre;
+  overflow-x: auto;
+  color: #3C2A1A;
+  letter-spacing: 0.05em;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #EDD9A3;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A84C;
+  border-radius: 4px;
+}
+
+/* Section card base */
+.fresco-card {
+  background: rgba(245, 230, 200, 0.97);
+  border: 1px solid #C9A84C;
+  border-radius: 6px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(201, 168, 76, 0.3);
+  position: relative;
+}
+
+/* Day-grid tile cards — fully opaque, strong shadow to lift off painting */
+.day-tile {
+  background: rgba(245, 230, 200, 0.97) !important;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.25) !important;
+}
+
+/* Hero scroll-cue bounce */
+@keyframes bounce-y {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(8px); }
+}
+.bounce-cue {
+  animation: bounce-y 1.8s ease-in-out infinite;
+}
+
+/* Difficulty stars */
+.star-filled { color: #C9A84C; }
+.star-empty  { color: #C9A84C44; }
