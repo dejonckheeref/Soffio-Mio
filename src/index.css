@@ -22,44 +22,45 @@
   box-sizing: border-box;
 }
 
-html {
-  background-color: #1a0c04;
+/* html + body fill the viewport and never scroll themselves.
+   This is the only iOS Safari-proof way to get a truly fixed background:
+   the body holds the image and stays still; #root scrolls over it. */
+html, body {
+  height: 100%;
+  overflow: hidden;
 }
 
 body {
   margin: 0;
   padding: 0;
+  /* Background on the non-scrolling body = always fixed on every browser */
+  background-color: #1a0c04;
+  background-image: url('/frontier-bg.png');
+  background-size: cover;
+  background-position: 55% 38%;
+  background-repeat: no-repeat;
   font-family: 'EB Garamond', serif;
   color: #3C2A1A;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* iOS-safe fixed background — a real fixed div works on all browsers;
-   background-attachment:fixed is broken on iOS Safari */
-.bg-fixed {
-  position: fixed;
-  inset: 0;
-  z-index: -2;
-  background-image: url('/frontier-bg.png');
-  background-size: cover;
-  background-position: 55% 38%;
-  background-repeat: no-repeat;
-}
-
+/* #root is the ONE scroll container for the whole app */
 #root {
-  min-height: 100svh;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   position: relative;
   z-index: 1;
 }
 
-/* Dark vignette sits between image and content so text stays readable */
+/* Dark vignette — fixed to body so it never moves either */
 body::before {
   content: '';
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: -1;
+  z-index: 0;
   background: rgba(14, 7, 2, 0.28);
 }
 
