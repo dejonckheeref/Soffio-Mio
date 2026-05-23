@@ -52,17 +52,22 @@ export default function App() {
 
   if (lesson) {
     return (
-      <LessonView
-        lesson={lesson}
-        onBack={() => setSelectedDay(null)}
-        completed={completedDays.has(lesson.day)}
-        onToggleComplete={() => toggleComplete(lesson.day)}
-      />
+      <>
+        <div className="bg-fixed" aria-hidden="true" />
+        <LessonView
+          lesson={lesson}
+          onBack={() => setSelectedDay(null)}
+          completed={completedDays.has(lesson.day)}
+          onToggleComplete={() => toggleComplete(lesson.day)}
+        />
+      </>
     )
   }
 
   return (
-    <div className="relative z-10">
+    <>
+      <div className="bg-fixed" aria-hidden="true" />
+      <div className="relative z-10">
 
       {/* ── HERO ─────────────────────────────────────────────────────────── */}
       {/* Full viewport: painting visible, player front and center          */}
@@ -146,5 +151,6 @@ export default function App() {
       </div>
 
     </div>
+    </>
   )
 }
